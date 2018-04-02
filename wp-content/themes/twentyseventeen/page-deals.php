@@ -26,6 +26,7 @@ get_header(); ?>
 			elseif (is_page('bells')) {
 				$sql = "SELECT * FROM wp_deals WHERE deal_category='bell';";
 			}
+			
 			$result = mysqli_query($conn, $sql);
 			$resultCheck = mysqli_num_rows($result);
 
