@@ -107,8 +107,7 @@
 				<div class="credits">
 
 					<p>&copy; <?php echo date( 'Y' ); ?> <a href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php bloginfo( 'name' ); ?></a>.</p>
-					<p><?php _e( 'Powered by', 'fukasawa' ); ?> <a href="http://www.wordpress.org">WordPress</a>.</p>
-					<p><?php _e( 'Theme by', 'fukasawa' ); ?> <a href="http://www.andersnoren.se">Anders Nor&eacute;n</a>.</p>
+					<p><?php _e( 'Powered by', 'fukasawa' ); ?> <a href="https://www.dsmtool.com/">DSM Tool</a>.</p>
 
 				</div>
 

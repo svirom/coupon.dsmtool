@@ -605,4 +605,10 @@ add_action( 'wp_head' , array( 'fukasawa_Customize' , 'fukasawa_header_output' )
 // Enqueue live preview javascript in Theme Customizer admin screen
 add_action( 'customize_preview_init' , array( 'fukasawa_Customize' , 'fukasawa_live_preview' ) );
 
+/*--------------My functions--------------------------*/
+// Add custom css.
+add_action( 'wp_enqueue_scripts', function () {
+	wp_enqueue_style( 'custom', get_template_directory_uri() . '/assets/css/custom.css' );
+} );
+
 ?>

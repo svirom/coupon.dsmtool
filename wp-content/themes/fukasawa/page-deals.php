@@ -6,7 +6,7 @@ include_once 'dbinc/dbdeals.php';
 
 get_header(); ?>
 
-<div class="content thin">
+<div class="content">
 
 		<?php
 
@@ -24,12 +24,12 @@ get_header(); ?>
 			$resultCheck = mysqli_num_rows($result);
 
 			if ($resultCheck > 0) { ?>
-				<div class="toy_wrapper"> <?php
+				<div class="toy_wrapper posts" id="posts"> <?php
 				while ($row = mysqli_fetch_assoc($result)) {
-					echo "<div class='col-3'>";
-					echo "<div class='item'>";
+					echo "<div class='col-3 post-container'>";
+					echo "<div class='item post'>";
 					echo "<div class='img_wrap'><img src='". $row['deal_item_img'] ."' alt=''></div>";
-					echo "<h3>" . $row['deal_item_title'] . "</h3>";
+					echo "<h3 class='post-title'>" . $row['deal_item_title'] . "</h3>";
 					echo "<p class='price_retail'>Retail price:<span>$" . $row['deal_price_high'] . "</span>(<a href='". $row['deal_url_high'] ."'>click to view</a>)</p>";
 					echo "<p class='price_deal'>Deal price:<span>$" . $row['deal_price_deal'] . "</span></p>";
 					echo "<a href='". $row['deal_url_deal'] ."'>View Deal</a>";
