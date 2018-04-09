@@ -11,17 +11,24 @@ get_header(); ?>
 		<?php
 
 			if (is_page('toys')) {
-				$sql = "SELECT * FROM wp_deals WHERE deal_category='toy';";
+				$sql = "SELECT * FROM wp_deals WHERE deal_category='toy' ORDER BY deal_date DESC;";
 			}
 			elseif (is_page('cups')) {
-				$sql = "SELECT * FROM wp_deals WHERE deal_category='cup';";
+				$sql = "SELECT * FROM wp_deals WHERE deal_category='cup' ORDER BY deal_date DESC;";
 			}
 			elseif (is_page('bells')) {
-				$sql = "SELECT * FROM wp_deals WHERE deal_category='bell';";
+				$sql = "SELECT * FROM wp_deals WHERE deal_category='bell' ORDER BY deal_date DESC;";
 			}
 			
 			$result = mysqli_query($conn, $sql);
-			$resultCheck = mysqli_num_rows($result);
+			$resultCheck = mysqli_num_rows($result); ?>
+
+			<div class="page-title">
+				<div class="section-inner">
+					<?php the_title( '<h4>', '</h4>' ); ?>			
+				</div><!-- .section-inner -->	
+			</div>
+				<?php
 
 			if ($resultCheck > 0) { ?>
 				<div class="toy_wrapper posts" id="posts"> <?php
