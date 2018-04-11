@@ -8,7 +8,7 @@
 	$resultCheck = mysqli_num_rows($result);
 
 	if ($resultCheck > 0) { ?>
-		<div class="toy_wrapper posts" id="posts"> <?php
+		<div class="deals_home deals_wrapper posts" id="posts"> <?php
 		while ($row = mysqli_fetch_assoc($result)) {
 			echo "<div class='col-3 post-container'>";
 			echo "<div class='item post'>";

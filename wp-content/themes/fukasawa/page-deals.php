@@ -28,26 +28,70 @@ get_header(); ?>
 					<?php the_title( '<h4>', '</h4>' ); ?>			
 				</div><!-- .section-inner -->	
 			</div>
-				<?php
 
-			if ($resultCheck > 0) { ?>
-				<div class="toy_wrapper posts" id="posts"> <?php
-				while ($row = mysqli_fetch_assoc($result)) {
-					echo "<div class='col-3 post-container'>";
-					echo "<div class='item post'>";
-					echo "<div class='img_wrap'><img src='". $row['deal_item_img'] ."' alt=''></div>";
-					echo "<h3 class='post-title'>" . $row['deal_item_title'] . "</h3>";
-					echo "<p class='price_retail'>Retail price:<span>$" . $row['deal_price_high'] . "</span>(<a href='". $row['deal_url_high'] ."'>click to view</a>)</p>";
-					echo "<p class='price_deal'>Deal price:<span>$" . $row['deal_price_deal'] . "</span></p>";
-					echo "<a href='". $row['deal_url_deal'] ."'>View Deal</a>";
-					echo "</div>";
-					echo "</div>";
+			<div class="filter_date">
+				<a href="#currWeek" class="filter_choose active"><p>Current week</p></a>
+				<a href="#prevWeek" class="filter_choose"><p>Previous week</p></a>
+				<a href="#archiveWeek" class="filter_choose"><p>Archive</p></a>
+				<div class="clear"></div>
+			</div>
+				
+			<div class="deals_wrapper posts" id="currWeek">	
+			 <?php
+				if ($resultCheck > 0) {
+					while ($row = mysqli_fetch_assoc($result)) {
+						echo "<div class='col-3 post-container'>";
+						echo "<div class='item post'>";
+						echo "<div class='img_wrap'><img src='". $row['deal_item_img'] ."' alt=''></div>";
+						echo "<h3 class='post-title'>" . $row['deal_item_title'] . "</h3>";
+						echo "<p class='price_retail'>Retail price:<span>$" . $row['deal_price_high'] . "</span>(<a href='". $row['deal_url_high'] ."'>click to view</a>)</p>";
+						echo "<p class='price_deal'>Deal price:<span>$" . $row['deal_price_deal'] . "</span></p>";
+						echo "<a href='". $row['deal_url_deal'] ."'>View Deal</a>";
+						echo "</div>";
+						echo "</div>";
+					}
+				} else {
+					echo "<p>There are no deals this week</p>";
 				} ?>
-				</div>
-				<?php
-			}
+			</div>
 
-			?>			
+			<div class="deals_wrapper posts" id="prevWeek">	
+			 <?php
+				if ($resultCheck1 > 0) {
+					while ($row = mysqli_fetch_assoc($result)) {
+						echo "<div class='col-3 post-container'>";
+						echo "<div class='item post'>";
+						echo "<div class='img_wrap'><img src='". $row['deal_item_img'] ."' alt=''></div>";
+						echo "<h3 class='post-title'>" . $row['deal_item_title'] . "</h3>";
+						echo "<p class='price_retail'>Retail price:<span>$" . $row['deal_price_high'] . "</span>(<a href='". $row['deal_url_high'] ."'>click to view</a>)</p>";
+						echo "<p class='price_deal'>Deal price:<span>$" . $row['deal_price_deal'] . "</span></p>";
+						echo "<a href='". $row['deal_url_deal'] ."'>View Deal</a>";
+						echo "</div>";
+						echo "</div>";
+					}
+				} else {
+					echo "<p>There were no deals previous week</p>";
+				} ?>
+			</div>
+
+			<div class="deals_wrapper posts" id="archiveWeek">	
+			 <?php
+				if ($resultCheck2 > 0) {
+					while ($row = mysqli_fetch_assoc($result)) {
+						echo "<div class='col-3 post-container'>";
+						echo "<div class='item post'>";
+						echo "<div class='img_wrap'><img src='". $row['deal_item_img'] ."' alt=''></div>";
+						echo "<h3 class='post-title'>" . $row['deal_item_title'] . "</h3>";
+						echo "<p class='price_retail'>Retail price:<span>$" . $row['deal_price_high'] . "</span>(<a href='". $row['deal_url_high'] ."'>click to view</a>)</p>";
+						echo "<p class='price_deal'>Deal price:<span>$" . $row['deal_price_deal'] . "</span></p>";
+						echo "<a href='". $row['deal_url_deal'] ."'>View Deal</a>";
+						echo "</div>";
+						echo "</div>";
+					}
+				} else {
+					echo "<p>There are no deals in archive</p>";
+				} ?>
+			</div>			
 
 	
 	<div class="clear"></div>

@@ -606,9 +606,12 @@ add_action( 'wp_head' , array( 'fukasawa_Customize' , 'fukasawa_header_output' )
 add_action( 'customize_preview_init' , array( 'fukasawa_Customize' , 'fukasawa_live_preview' ) );
 
 /*--------------My functions--------------------------*/
-// Add custom css.
+// Add custom css and js.
 add_action( 'wp_enqueue_scripts', function () {
-	wp_enqueue_style( 'custom', get_template_directory_uri() . '/assets/css/custom.css' );
+	wp_enqueue_style( 'custom', get_template_directory_uri() . '/css/custom.css' );
+} );
+add_action( 'wp_enqueue_scripts', function () {
+ 	wp_enqueue_script( 'customjs', get_template_directory_uri() . '/js/custom.js', array('jquery') );
 } );
 
 ?>
