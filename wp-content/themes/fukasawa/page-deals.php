@@ -19,6 +19,18 @@ get_header(); ?>
 			elseif (is_page('bells')) {
 				$sql = "SELECT * FROM wp_deals WHERE deal_category='bell' ORDER BY deal_date DESC;";
 			}
+
+			$sql_date = "SELECT deal_date FROM wp_deals;";
+			$result_date = mysqli_query($conn, $sql_date);
+			//$row = mysqli_fetch_assoc($result_date);
+			while ($row = mysqli_fetch_assoc($result_date)) {
+				$d = strtotime($row['deal_date']);
+				print_r($row['deal_date']);
+				echo '<br>';
+				echo "<p>". gettype($row['deal_date']) ."</p>";
+				echo "<p>". date("d-m-Y", $d) ."</p>";
+			}
+			echo gettype($row['deal_date']);
 			
 			$result = mysqli_query($conn, $sql);
 			$resultCheck = mysqli_num_rows($result); ?>
