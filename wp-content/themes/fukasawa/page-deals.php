@@ -25,12 +25,17 @@ get_header(); ?>
 			//$row = mysqli_fetch_assoc($result_date);
 			while ($row = mysqli_fetch_assoc($result_date)) {
 				$d = strtotime($row['deal_date']);
-				print_r($row['deal_date']);
-				echo '<br>';
-				echo "<p>". gettype($row['deal_date']) ."</p>";
-				echo "<p>". date("d-m-Y", $d) ."</p>";
+				$w = date("w", $d);
+				$curr_w = date("w");
+				//print_r($row['deal_date']);
+				//echo '<br>';
+				//echo "<p>". strftime("%a, %d/%m/%Y", $d) ."</p>";
+				//echo "<p>". $w ."</p>";
+				//echo "<p>". $curr_w ."</p>";
+				//echo "<p>". gettype($row['deal_date']) ."</p>";
+				//echo "<p>". date("d-m-Y", $d) ."</p>";
 			}
-			echo gettype($row['deal_date']);
+			//echo gettype($row['deal_date']);
 			
 			$result = mysqli_query($conn, $sql);
 			$resultCheck = mysqli_num_rows($result); ?>
@@ -51,20 +56,39 @@ get_header(); ?>
 			<div class="deals_wrapper posts" id="currWeek">	
 			 <?php
 				if ($resultCheck > 0) {
+					$row = mysqli_fetch_assoc($result);
+					$d = strtotime($row['deal_date']);
+					$curr_week = strtotime("last monday"); //the beginning of current week
+					$next_week = strtotime("next monday"); //the beginning of next week
+					//echo "<p class='curr_week'>". $curr_week ."</p>";
+					//echo "<p class=''>___---___</p>";
+					//echo "<p class='curr_week'>". $next_week ."</p>";
+					$curr_date = strtotime("now");		
+					
 					while ($row = mysqli_fetch_assoc($result)) {
-						echo "<div class='col-3 post-container'>";
-						echo "<div class='item post'>";
-						echo "<div class='img_wrap'><img src='". $row['deal_item_img'] ."' alt=''></div>";
-						echo "<h3 class='post-title'>" . $row['deal_item_title'] . "</h3>";
-						echo "<p class='price_retail'>Retail price:<span>$" . $row['deal_price_high'] . "</span>(<a href='". $row['deal_url_high'] ."'>click to view</a>)</p>";
-						echo "<p class='price_deal'>Deal price:<span>$" . $row['deal_price_deal'] . "</span></p>";
-						echo "<a href='". $row['deal_url_deal'] ."'>View Deal</a>";
-						echo "</div>";
-						echo "</div>";
+						$d = strtotime($row['deal_date']);
+						if ( ($curr_week <= $d) && ($d < $next_week) ) {
+							echo "<div class='col-3 post-container'>";
+							echo "<div class='item post'>";
+							echo "<div class='img_wrap'><img src='". $row['deal_item_img'] ."' alt=''></div>";
+							echo "<h3 class='post-title'>" . $row['deal_item_title'] . "</h3>";
+							echo "<p class='price_retail'>Retail price:<span>$" . $row['deal_price_high'] . "</span>(<a href='". $row['deal_url_high'] ."'>click to view</a>)</p>";
+							echo "<p class='price_deal'>Deal price:<span>$" . $row['deal_price_deal'] . "</span></p>";
+							echo "<a href='". $row['deal_url_deal'] ."'>View Deal</a>";
+							echo "</div>";
+							echo "</div>";	
+						} 
 					}
+
 				} else {
+							echo "<p>There are no deals this week</p>";
+						}  ?>
+				<?php 
+				$c = "item";
+				if (!count($c)) {
 					echo "<p>There are no deals this week</p>";
-				} ?>
+				}
+				?>		
 			</div>
 
 			<div class="deals_wrapper posts" id="prevWeek">	
