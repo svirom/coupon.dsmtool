@@ -119,7 +119,7 @@
 	margin-bottom: 0.5em;
 	padding: 0;
 	text-align: center;
-	font-weight: 600; 
+	/*font-weight: 600; */
 }
 .item .price_retail span {
 	position: relative;
