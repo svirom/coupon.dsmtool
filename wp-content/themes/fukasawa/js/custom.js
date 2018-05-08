@@ -14,6 +14,33 @@ jQuery(function($) {
       $(this.hash).stop().fadeIn(400).masonry();
     }
 
+    //infinite scroll
+    $(document).on('click', '#btn_more', function(){  
+           var last_deal_id = $(this).data("deal");  
+           $('#btn_more').html("Loading...");  
+           $.ajax({  
+                url:"load_data.php",  
+                method:"POST",  
+                data:{last_deal_id:last_deal_id},  
+                dataType:"text",  
+                success:function(data)  
+                {  
+                     if(data != '')  
+                     {  
+                          $('#remove_row').remove();  
+                          $('#posts').append(data);  
+                     }  
+                     else  
+                     {  
+                          $('#btn_more').html("No Data");  
+                     }  
+                }
+                error: 
+           });  
+      }); 
+
+
+
   });
 
 });

@@ -1,53 +1,58 @@
 <?php 
 
-
+include_once 'dbinc/dbdeals.php';
 
 get_header(); ?>
+<?php
+$sql = "SELECT * FROM wp_deals ORDER BY deal_date DESC LIMIT 10;";
+
+	$result = mysqli_query($conn, $sql);
+	$resultCheck = mysqli_num_rows($result); 
+	$deal_id = '';  ?>
 
 <div class="content">
-																	                    
-	<?php if ( have_posts() ) :
+					<?php												                    
+	if ($resultCheck > 0) { ?>
+		<div class="deals_home deals_wrapper posts" id="posts"> <?php
+		while ($row = mysqli_fetch_assoc($result)) {
+			echo "<div class='post-container'>";
+			echo "<div class='item post'>";
+			echo "<div class='img_wrap'><img src='". $row['deal_item_img'] ."' alt=''></div>";
+			echo "<h3 class='post-title'>" . $row['deal_item_title'] . "</h3>";
+			echo "<p class='price_retail'>Retail price:<span>$" . $row['deal_price_high'] . "</span>(<a href='". $row['deal_url_high'] ."'>click to view</a>)</p>";
+			echo "<p class='price_deal'>Deal price:<span>$" . $row['deal_price_deal'] . "</span></p>";
+			echo "<a href='". $row['deal_url_deal'] ."'>View Deal</a>";
+			echo "</div>";
+			echo "</div>";
+			$deal_id = $row["deal_id"];
+		} ?>
+		</div>
+		<div id="remove_row">
+			<button type="button" name="btn_more" data-deal="<?php echo $deal_id; ?>" id="btn_more" class="btn">more</button>
+		</div>
+		<?php
+	}
+
+	?>			
+
+	
+	<div class="clear"></div>
 		
-		$paged = get_query_var( 'paged' ) ? get_query_var( 'paged' ) : 1;
-		$total_post_count = wp_count_posts();
-		$published_post_count = $total_post_count->publish;
-		$total_pages = ceil( $published_post_count / $posts_per_page );
+	
 		
-		if ( 1 < $paged ) : ?>
 		
-			<div class="page-title">
-			
-				<h4><?php printf( __( 'Page %s of %s', 'fukasawa' ), $paged, $wp_query->max_num_pages ); ?></h4>
-				
-			</div><!-- .page-title -->
-			
-			<div class="clear"></div>
-		
-		<?php endif; 
 	
 		
 			
-				get_template_part( 'content-deals', get_post_format() );
+				
 				
 			
 			
-		endif; ?>
+	
 		
 	</div><!-- .posts -->
 	
-	<?php if ( $wp_query->max_num_pages > 1 ) : ?>
-		
-		<div class="archive-nav">
-				
-			<?php echo get_next_posts_link( __( 'Older posts', 'fukasawa' ) . ' &rarr;' ); ?>
-				
-			<?php echo get_previous_posts_link( '&larr; ' . __( 'Newer posts', 'fukasawa' ) ); ?>
-			
-			<div class="clear"></div>
-						
-		</div><!-- .archive-nav -->
-						
-	<?php endif; ?>
+	
 		
 </div><!-- .content -->
 	              	        
