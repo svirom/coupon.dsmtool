@@ -1,5 +1,5 @@
 <?php
-
+require_once 'functions/loadmore.php';
 
 /* ---------------------------------------------------------------------------------------------
    THEME SETUP
@@ -613,5 +613,23 @@ add_action( 'wp_enqueue_scripts', function () {
 add_action( 'wp_enqueue_scripts', function () {
  	wp_enqueue_script( 'customjs', get_template_directory_uri() . '/js/custom.js', array('jquery') );
 } );
+
+//Ajax posts loading on main page
+function true_loadmore_scripts() {
+    wp_enqueue_script( 'true_loadmore', get_template_directory_uri() . '/js/loadmore.js', array('jquery') );
+    wp_localize_script( 'true_loadmore', 'PS', array( 
+        'ajaxurl' => admin_url( 'admin-ajax.php' ), 
+        )
+    );
+}
+add_action( 'wp_enqueue_scripts', 'true_loadmore_scripts' );
+
+/*add_action('wp_head', 'true_loadmore_scripts');
+
+function true_loadmore_scripts() {
+    echo '<script type="text/javascript">
+           var ajaxurl = "' . admin_url('admin-ajax.php') . '";
+         </script>';
+}*/
 
 ?>

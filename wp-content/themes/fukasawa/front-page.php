@@ -8,7 +8,7 @@ $sql = "SELECT * FROM wp_deals ORDER BY deal_date DESC LIMIT 10;";
 
 	$result = mysqli_query($conn, $sql);
 	$resultCheck = mysqli_num_rows($result); 
-	$deal_id = '';  ?>
+	/*$deal_id = '';*/  ?>
 
 <div class="content">
 					<?php												                    
@@ -24,11 +24,12 @@ $sql = "SELECT * FROM wp_deals ORDER BY deal_date DESC LIMIT 10;";
 			echo "<a href='". $row['deal_url_deal'] ."'>View Deal</a>";
 			echo "</div>";
 			echo "</div>";
-			$deal_id = $row["deal_id"];
+			//$deal_id = $row["deal_id"];
+			$deal_date = $row["deal_date"];
 		} ?>
 		</div>
 		<div id="remove_row">
-			<button type="button" name="btn_more" data-deal="<?php echo $deal_id; ?>" id="btn_more" class="btn">more</button>
+			<button type="button" name="btn_more" data-deal="<?php echo $deal_date; ?>" id="btn_more" class="btn">more</button>
 		</div>
 		<?php
 	}
